@@ -1,9 +1,11 @@
-package br.com.weleson.recruitment_system.modules.candidate;
+package br.com.weleson.recruitment_system.modules.company.entities;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.validator.constraints.Length;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,18 +13,14 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.Data;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.validator.constraints.Length;
-
+@Entity(name = "company")
 @Data
-@Entity(name = "candidates")
-public class CandidateEntity {
+public class CompanyEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID id;
-  private String name;
 
   @NotBlank(message = "Username cannot be blank")
   @Pattern(regexp = "\\S+", message = "Username cannot contain whitespace")
@@ -33,11 +31,13 @@ public class CandidateEntity {
 
   @Length(min = 6, max = 50, message = "Password must be between 6 and 50 characters long")
   private String password;
-
+  
+  private String website;
+  private String name;
   private String description;
-  private String curriculum;
 
   @CreationTimestamp
-  private LocalDateTime createdAt;
+  private  LocalDateTime createdAt;
+
 
 }
