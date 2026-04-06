@@ -14,7 +14,6 @@ import br.com.weleson.recruitment_system.modules.company.dto.CreateJobDTO;
 import br.com.weleson.recruitment_system.modules.company.entities.JobEntity;
 import br.com.weleson.recruitment_system.modules.company.useCases.CreateJobUseCase;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
