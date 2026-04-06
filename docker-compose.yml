@@ -1,3 +1,11 @@
+networks:
+  rs-network:
+    driver: bridge
+
+volumes:
+  prometheus_data:
+  grafana_data:
+
 services:
   postgres:
     container_name: recruitment-postgres
@@ -8,3 +16,25 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: recruitment
+    networks:
+      - rs-network
+
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:latest
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml:Z
+      - prometheus_data:/prometheus
+    networks:
+      - rs-network
+    ports:
+      - "9090:9090"
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:latest
+    networks:
+      - rs-network
+    ports:
+      - "3000:3000"
